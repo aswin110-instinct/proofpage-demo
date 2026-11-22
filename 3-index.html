@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProofPage — turn customer reviews into a one-page site</title>
+<meta name="description" content="Demo: paste a Google Maps link or your own reviews, get a one-page website written by live AI from what customers say. No Google data fetched.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <div class="brand"><span class="brand-mark">✦</span> ProofPage</div>
+    <span class="demo-pill">Live AI demo · no Google data</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Paste a Google Maps link.<br>Get a website written by its reviews.</h1>
+      <p class="lede">ProofPage reads what customers already say about a local business and turns it into a one-page site — headline, highlights, and all.</p>
+
+      <form id="gen-form" class="gen-form">
+        <input id="maps-input" type="url" inputmode="url" placeholder="https://maps.google.com/… paste a business link"
+               aria-label="Google Maps link" autocomplete="off">
+        <button type="submit" class="btn btn-primary">Generate my site</button>
+      </form>
+      <p class="hint">A pasted link is only a reference in this demo — it analyses the matching sample business below. Nothing is scraped from Google.</p>
+      <p id="ai-status" class="ai-status">Live AI: free Pollinations text API · no key · no Google data fetched</p>
+
+      <div class="samples">
+        <p class="samples-label">Try a sample business</p>
+        <div id="sample-cards" class="sample-cards"></div>
+      </div>
+
+      <details class="own" id="own-details">
+        <summary>Or use your own business and reviews</summary>
+        <form id="own-form" class="own-form">
+          <div class="own-grid">
+            <input id="own-name" type="text" placeholder="Business name" aria-label="Business name" maxlength="80">
+            <input id="own-category" type="text" placeholder="Category (e.g. Café)" aria-label="Category" maxlength="60">
+            <input id="own-area" type="text" placeholder="City / area" aria-label="City or area" maxlength="60">
+            <input id="own-services" type="text" placeholder="Services, comma separated" aria-label="Services" maxlength="200">
+          </div>
+          <textarea id="own-reviews" rows="7" aria-label="Customer reviews" placeholder="Paste your customer reviews, one per line. Optional rating at the start:&#10;5 - The filter coffee is the best in town&#10;4 - Quiet place to work, Wi-Fi was patchy at lunch"></textarea>
+          <label class="rights"><input id="own-rights" type="checkbox"> <span>These are my customers' words and I have the right to use them on my website.</span></label>
+          <p class="hint">Emails, phone numbers and links are removed before the AI sees anything. Paste only feedback you have the right to use — a scraped export of someone else's Google reviews does not become cleared by pasting it.</p>
+          <p id="own-note" class="note hidden"></p>
+          <p id="own-error" class="error hidden"></p>
+          <button type="submit" class="btn btn-primary">Generate from my reviews</button>
+        </form>
+      </details>
+    </div>
+  </section>
+
+  <section id="pipeline" class="pipeline hidden">
+    <div class="wrap">
+      <h2 id="pipeline-title">Building your site…</h2>
+      <ol id="steps" class="steps"></ol>
+    </div>
+  </section>
+
+  <section id="result" class="result hidden">
+    <div class="wrap">
+      <div class="result-head">
+        <h2>Your site is ready</h2>
+        <div class="view-toggle" role="group" aria-label="Preview size">
+          <button id="view-desktop" class="toggle active" type="button">Desktop</button>
+          <button id="view-mobile" class="toggle" type="button">Mobile</button>
+        </div>
+      </div>
+      <div id="preview-frame-wrap" class="preview-frame-wrap">
+        <iframe id="preview" title="Generated site preview" sandbox="allow-same-origin"></iframe>
+      </div>
+      <div class="publish-row">
+        <button id="publish-btn" class="btn btn-primary" type="button">Publish</button>
+        <button id="edit-btn" class="btn btn-ghost" type="button">Start over</button>
+      </div>
+      <div id="published" class="published hidden">
+        <p>Your site is live at</p>
+        <div class="link-row">
+          <a id="published-link" href="#" target="_blank" rel="noopener"></a>
+          <button id="copy-btn" class="btn btn-ghost" type="button">Copy link</button>
+        </div>
+        <p class="hint">In the full product this link is emailed to the business owner. In this demo it is a shareable page on this site.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">ProofPage demo · live AI over fictional samples or reviews you supply · not affiliated with Google</div>
+</footer>
+
+<script src="render.js"></script>
+<script src="ai.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
