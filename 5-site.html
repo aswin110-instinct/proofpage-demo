@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your site</title>
+</head>
+<body>
+<script src="render.js"></script>
+<script>
+(function () {
+  function decode(str) {
+    var b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    return JSON.parse(decodeURIComponent(escape(atob(b64))));
+  }
+  var hash = window.location.hash || '';
+  if (hash.indexOf('#d=') === 0) {
+    try {
+      var spec = decode(hash.slice(3));
+      document.open();
+      document.write(renderSiteHtml(spec));
+      document.close();
+      return;
+    } catch (e) { /* fall through to error */ }
+  }
+  document.body.style.cssText = 'font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;background:#f6f4ef;color:#101418;';
+  document.body.innerHTML = '<div style="text-align:center;max-width:420px;padding:20px">' +
+    '<h1 style="font-size:22px;margin-bottom:10px">This link does not contain a site</h1>' +
+    '<p style="color:#5b6470">Generate one from the ProofPage demo home page.</p>' +
+    '<p style="margin-top:16px"><a href="index.html" style="color:#e8590c;font-weight:700">Go to the generator</a></p></div>';
+})();
+</script>
+</body>
+</html>
